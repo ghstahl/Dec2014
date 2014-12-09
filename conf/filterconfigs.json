@@ -1,0 +1,15 @@
+{
+    "filters":
+    [
+        {
+            "struct":"RequestIdFilterType",
+            "pattern":"/",
+            "position":"beego.BeforeRouter"
+        },
+        {
+            "struct":"RequestIdFilterType",
+            "pattern":"/*",
+            "position":"beego.BeforeRouter"
+        }
+    ]
+}
