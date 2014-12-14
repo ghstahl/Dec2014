@@ -4,12 +4,26 @@ import (
 	"github.com/astaxie/beego"
 	"fmt"
 	"github.com/ghstahl/pingbeego/configuration"
+	"github.com/ghstahl/pingbeego/filters"
+	log "github.com/inconshreveable/log15"
+
+	"github.com/astaxie/beego/context"
 )
 
 
 
 type PingoController struct {
 	beego.Controller
+ 	theLogger log.Logger
+}
+
+func (this *PingoController) Logger() log.Logger{
+	return this.theLogger
+}
+
+func (this *PingoController) PrepareLoggingContext(ctx *context.Context) {
+	requestId := filters.GetCurrentRequestId(ctx);
+	this.theLogger = log.New(filters.WellKnown.RequestId, requestId)
 }
 
 func (this *PingoController) PrepareLayout(viewStartKey string) {
