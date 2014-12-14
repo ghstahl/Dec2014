@@ -3,6 +3,7 @@ package controllers
 import (
 	"github.com/ghstahl/Dec2014/MVC"
 	"github.com/ghstahl/pingbeego/filters"
+	"time"
 )
 
 type MainController struct {
@@ -18,7 +19,13 @@ func (this *MainController) Get() {
 	r := this.Ctx.Request
 	w := this.Ctx.ResponseWriter
 
-	this.Logger().Warn("abnormal conn rate", "rate", 3, "low", 2, "high", 3)
+	for i := 0; i < 5; i++ {
+		time.Sleep(1000 * time.Millisecond)
+		this.Logger().Warn("abnormal conn rate", "rate", 3, "low", 2, "high", 3)
+
+	}
+
+
 
 	this.Data[filters.WellKnown.RequestId] = filters.GetCurrentRequestId(this.Ctx)
 	this.Data["Website"] = "beego.me"

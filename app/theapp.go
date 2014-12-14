@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/ghstahl/pingbeego/configuration"
-	"github.com/ghstahl/pingbeego/filters"
+	"github.com/ghstahl/pingbeego/filterInfrastructure"
 	"github.com/astaxie/beego/context"
 	"code.google.com/p/log4go"
 	log "github.com/inconshreveable/log15"
@@ -41,7 +41,7 @@ var FilterTest = func(ctx *context.Context) {
 
 func (self *App) initializeFilters() {
 	log4go.Trace("initializeFilters: %s (%d)", "herb", 3)
-	filters.TheFilterConfigs.Load()
+	filterInfrastructure.TheFilterConfigs.Load()
 	beego.InsertFilter("/", beego.BeforeRouter, FilterTest)//matches only the / route
 	beego.InsertFilter("*", beego.BeforeRouter, FilterTest)// matches everything else, but the / route
 }
